@@ -1,316 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sanjay’s Portfolio</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sanjay's Portfolio</title>
 
-  /* Base Reset */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #0f111a;
-    color: #a3b3cc;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  /* Scrollbar Styling */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0f111a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2c98f0;
-    border-radius: 4px;
-  }
+  <!-- Model Viewer Script -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-  /* Header / Nav */
-  header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(12, 14, 25, 0.85);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 10px #1a73e8aa;
-    z-index: 999;
-  }
-  nav {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-  }
-  .logo {
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: #2c98f0;
-    letter-spacing: 2px;
-    cursor: default;
-  }
-  ul.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-  }
-  ul.nav-links li a {
-    text-decoration: none;
-    color: #a3b3cc;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    position: relative;
-  }
-  ul.nav-links li a::after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background: #2c98f0;
-    transition: width 0.3s ease;
-  }
-  ul.nav-links li a:hover,
-  ul.nav-links li a:focus {
-    color: #2c98f0;
-  }
-  ul.nav-links li a:hover::after,
-  ul.nav-links li a:focus::after {
-    width: 100%;
-  }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-  /* Hamburger Menu (mobile) */
-  .menu-toggle {
-    display: none;
-    font-size: 1.8rem;
-    color: #2c98f0;
-    cursor: pointer;
-  }
-
-  /* Sections */
-  section {
-    max-width: 900px;
-    margin: 100px auto 60px auto;
-    padding: 2rem;
-    border-radius: 12px;
-    background: #1b1f33;
-    box-shadow: 0 0 25px #1a73e8aa;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s forwards;
-  }
-  section:nth-of-type(1) {
-    animation-delay: 0.15s;
-  }
-  section:nth-of-type(2) {
-    animation-delay: 0.35s;
-  }
-  section:nth-of-type(3) {
-    animation-delay: 0.55s;
-  }
-  section:nth-of-type(4) {
-    animation-delay: 0.75s;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  }
 
-  /* Headings */
-  h1, h2 {
-    color: #2c98f0;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    letter-spacing: 1.5px;
-  }
-  h1 {
-    font-size: 3rem;
-  }
-  h2 {
-    font-size: 2rem;
-    border-bottom: 3px solid #2c98f0;
-    padding-bottom: 0.3rem;
-    width: fit-content;
-  }
-
-  /* Intro */
-  .intro p {
-    font-size: 1.3rem;
-    color: #a3b3cc;
-    font-weight: 500;
-    max-width: 650px;
-  }
-
-  /* Skills */
-  ul.skills-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-left: 0;
-  }
-  ul.skills-list li {
-    background: #22335f;
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    font-weight: 600;
-    color: #66d9e8;
-    box-shadow: 0 0 8px #66d9e8aa;
-    cursor: default;
-    transition: box-shadow 0.3s ease;
-  }
-  ul.skills-list li:hover {
-    box-shadow: 0 0 14px #2c98f0;
-  }
-
-  /* Projects */
-  .projects-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-    gap: 1.8rem;
-  }
-  .project-card {
-    background: #22335f;
-    padding: 1.5rem 1.8rem;
-    border-radius: 15px;
-    box-shadow: 0 0 15px #1a73e8bb;
-    transition: transform 0.3s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-    color: #cce7ff;
-  }
-  .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 25px #2c98f0, 0 0 40px #66d9e8;
-    background: #27447a;
-  }
-  .project-card h3 {
-    margin-bottom: 0.6rem;
-    font-size: 1.3rem;
-    color: #66d9e8;
-  }
-  .project-card p {
-    font-size: 1rem;
-    color: #b0c9db;
-  }
-
-  /* Contact */
-  .contact form {
-    max-width: 450px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-  }
-  .contact label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #66d9e8;
-  }
-  .contact input, .contact textarea {
-    padding: 0.7rem 1rem;
-    margin-bottom: 1.3rem;
-    border: 2px solid #2c98f0;
-    border-radius: 8px;
-    background: #152238;
-    color: #a3b3cc;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  .contact input::placeholder,
-  .contact textarea::placeholder {
-    color: #5a7aa6;
-  }
-  .contact input:focus, .contact textarea:focus {
-    border-color: #66d9e8;
-    outline: none;
-  }
-  .contact button {
-    padding: 0.85rem;
-    background: #2c98f0;
-    color: #0f111a;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 0 20px #66d9e8;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  .contact button:hover {
-    background: #66d9e8;
-    box-shadow: 0 0 30px #2c98f0;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 1.2rem 1rem;
-    color: #5a7aa6;
-    font-size: 0.9rem;
-    user-select: none;
-  }
-
-  /* Back to Top button */
-  #back-to-top {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: #2c98f0;
-    color: #0f111a;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.8rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px #66d9e8;
-    opacity: 0.75;
-    transition: opacity 0.3s ease;
-    z-index: 10000;
-  }
-  #back-to-top:hover {
-    opacity: 1;
-    box-shadow: 0 0 25px #2c98f0;
-  }
-
-  /* Responsive */
-  @media(max-width: 768px) {
-    nav ul.nav-links {
-      display: none;
-      position: fixed;
-      top: 64px;
-      right: 0;
+    body {
+      font-family: 'Poppins', sans-serif;
       background: #0f111a;
-      flex-direction: column;
-      padding: 1rem 2rem;
-      width: 200px;
-      border-radius: 0 0 0 12px;
-      box-shadow: -2px 0 15px #1a73e8aa;
-      height: calc(100vh - 64px);
-      overflow-y: auto;
+      color: #a3b3cc;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    nav ul.nav-links.active {
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f111a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2c98f0;
+      border-radius: 4px;
+    }
+
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(12, 14, 25, 0.85);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 10px #1a73e8aa;
+      z-index: 999;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
     }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #2c98f0;
+      letter-spacing: 2px;
+      cursor: default;
+    }
+
+    ul.nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    ul.nav-links li a {
+      text-decoration: none;
+      color: #a3b3cc;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    ul.nav-links li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: #2c98f0;
+      transition: width 0.3s ease;
+    }
+
+    ul.nav-links li a:hover,
+    ul.nav-links li a:focus {
+      color: #2c98f0;
+    }
+
+    ul.nav-links li a:hover::after,
+    ul.nav-links li a:focus::after {
+      width: 100%;
+    }
+
     .menu-toggle {
-      display: block;
+      display: none;
+      font-size: 1.8rem;
+      color: #2c98f0;
+      cursor: pointer;
     }
-  }
-</style>
+
+    section {
+      max-width: 900px;
+      margin: 100px auto 60px auto;
+      padding: 2rem;
+      border-radius: 12px;
+      background: #1b1f33;
+      box-shadow: 0 0 25px #1a73e8aa;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    section:nth-of-type(1) { animation-delay: 0.15s; }
+    section:nth-of-type(2) { animation-delay: 0.35s; }
+    section:nth-of-type(3) { animation-delay: 0.55s; }
+    section:nth-of-type(4) { animation-delay: 0.75s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1, h2 {
+      color: #2c98f0;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: 1.5px;
+    }
+
+    h1 { font-size: 3rem; }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #2c98f0;
+      padding-bottom: 0.3rem;
+      width: fit-content;
+    }
+
+    .intro p {
+      font-size: 1.3rem;
+      color: #a3b3cc;
+      font-weight: 500;
+      max-width: 650px;
+    }
+
+    /* ✅ Updated model-viewer: no background, border, or shadow */
+    model-viewer {
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      margin-top: 30px;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    ul.skills-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-left: 0;
+    }
+
+    ul.skills-list li {
+      background: #22335f;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #66d9e8;
+      box-shadow: 0 0 8px #66d9e8aa;
+      cursor: default;
+      transition: box-shadow 0.3s ease;
+    }
+
+    ul.skills-list li:hover {
+      box-shadow: 0 0 14px #2c98f0;
+    }
+
+    .projects-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 1.8rem;
+    }
+
+    .project-card {
+      background: #22335f;
+      padding: 1.5rem 1.8rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #1a73e8bb;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      color: #cce7ff;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px #2c98f0, 0 0 40px #66d9e8;
+      background: #27447a;
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.6rem;
+      font-size: 1.3rem;
+      color: #66d9e8;
+    }
+
+    .project-card p {
+      font-size: 1rem;
+      color: #b0c9db;
+    }
+
+    .contact form {
+      max-width: 450px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact label {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #66d9e8;
+    }
+
+    .contact input, .contact textarea {
+      padding: 0.7rem 1rem;
+      margin-bottom: 1.3rem;
+      border: 2px solid #2c98f0;
+      border-radius: 8px;
+      background: #152238;
+      color: #a3b3cc;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact input::placeholder,
+    .contact textarea::placeholder {
+      color: #5a7aa6;
+    }
+
+    .contact input:focus, .contact textarea:focus {
+      border-color: #66d9e8;
+      outline: none;
+    }
+
+    .contact button {
+      padding: 0.85rem;
+      background: #2c98f0;
+      color: #0f111a;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 20px #66d9e8;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact button:hover {
+      background: #66d9e8;
+      box-shadow: 0 0 30px #2c98f0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.2rem 1rem;
+      color: #5a7aa6;
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    #back-to-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #2c98f0;
+      color: #0f111a;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #66d9e8;
+      opacity: 0.75;
+      transition: opacity 0.3s ease;
+      z-index: 10000;
+    }
+
+    #back-to-top:hover {
+      opacity: 1;
+      box-shadow: 0 0 25px #2c98f0;
+    }
+
+    @media(max-width: 768px) {
+      nav ul.nav-links {
+        display: none;
+        position: fixed;
+        top: 64px;
+        right: 0;
+        background: #0f111a;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        width: 200px;
+        border-radius: 0 0 0 12px;
+        box-shadow: -2px 0 15px #1a73e8aa;
+        height: calc(100vh - 64px);
+        overflow-y: auto;
+      }
+      nav ul.nav-links.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -330,6 +348,11 @@
 <section id="intro" class="intro">
   <h1>Hello, I’m Sanjay</h1>
   <p>Computer Science & AI graduate specializing in web development & AI projects.</p>
+
+  <!-- 3D Brain Model -->
+  <model-viewer src="model/brain.glb" alt="3D Brain Model"
+    auto-rotate camera-controls interaction-prompt="when-focused" shadow-intensity="1">
+  </model-viewer>
 </section>
 
 <section id="skills" class="skills">
@@ -347,15 +370,15 @@
 <section id="projects" class="projects">
   <h2>Projects</h2>
   <div class="projects-list">
-    <div class="project-card" tabindex="0" aria-label="Portfolio Landing Page">
+    <div class="project-card">
       <h3>Portfolio Landing Page</h3>
       <p>A clean, responsive landing page showcasing skills and contact info.</p>
     </div>
-    <div class="project-card" tabindex="0" aria-label="Event Signup Page">
+    <div class="project-card">
       <h3>Event Signup Page</h3>
       <p>Simple, user-friendly event page with call-to-action buttons.</p>
     </div>
-    <div class="project-card" tabindex="0" aria-label="Business Website">
+    <div class="project-card">
       <h3>Business Website</h3>
       <p>Multi-section responsive site with basic animations and smooth navigation.</p>
     </div>
@@ -382,7 +405,6 @@
 <button id="back-to-top" aria-label="Back to top">&#8679;</button>
 
 <script>
-  // Mobile menu toggle
   const menuToggle = document.getElementById('menu-toggle');
   const navLinks = document.getElementById('nav-links');
 
@@ -390,33 +412,24 @@
     navLinks.classList.toggle('active');
   });
 
-  // Smooth scroll for nav links
   document.querySelectorAll('ul.nav-links a').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       navLinks.classList.remove('active');
-      document.querySelector(link.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  // Back to top button functionality
   const backToTopBtn = document.getElementById('back-to-top');
 
   window.addEventListener('scroll', () => {
-    if(window.pageYOffset > 300) {
-      backToTopBtn.style.display = 'block';
-    } else {
-      backToTopBtn.style.display = 'none';
-    }
+    backToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
   });
 
   backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Show button initially hidden
   backToTopBtn.style.display = 'none';
 </script>
 
